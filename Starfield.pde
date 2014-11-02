@@ -1,59 +1,41 @@
-//your code here
-/*interface arraything
-{
- public void move();
- public void show();
-}
-class Particle implements arraything
-{
-  public void move()
-  {}
-  public void show()
-{}
-}
-
-class Oddball implements arraything
-{
-public void move()
-{}
-}
-*/
-Particle[] normal;
-Oddball[] debt;
+Particle [] part = new Particle[500];
 void setup()
 {
   size(600,600);  //your code here
-  debt= new Oddball [1];
-  for(int i=0; i<debt.length; i++)
+  for (int i=0; i<part.length; i++)
   {
-    debt[i]=new Oddball();
+    part[i]= new NormalParticle();
   }
- normal= new Particle[500];
- for(int i=0; i<normal.length; i++)
- {
-   normal[i]=new Particle();
- }
+  
+  part[0] = new OddballParticle();
+  part[1] = new JumboParticle();
 
 }
+
 void draw()
 {
    background(0);
-  for(int i=0; i<normal.length; i++)
-  { normal[i].show();
-    normal[i].move();
-  }
-  for(int i=0; i<debt.length; i++)
+  
+  for(int i=0; i<part.length; i++)
   {
-    debt[i].show(); 
-    debt[i].move();
+    part[i].move(); 
+    part[i].show();
   }
  }
 
-class Particle 
+interface Particle 
+{
+public void show();
+public void move();
+
+}
+
+class NormalParticle implements Particle 
 {double dTheta, dSpeed, dX, dY;
-  Particle() 
+  
+  NormalParticle() 
   {
-    dTheta=(Math.random()*2*Math.PI);
+    dTheta=(Math.random()*2*Math.PI)+1;
     dSpeed=(Math.random()*10); 
     dX=300;
     dY=300;
@@ -68,39 +50,34 @@ text("$",(float)dX-40,(float)dY);
 
 void move()
 {
-  dTheta=dTheta+.01;
+ dTheta= dTheta +.01;
   dX= dX+(Math.cos(dTheta)*dSpeed);
   dY= dY+(Math.sin(dTheta)*dSpeed);
 }
 
 }
 
-class Oddball
+class OddballParticle implements Particle 
 {
   double dTheta, dSpeed, dX, dY;
-  int siz;
-  Oddball() 
+ 
+  OddballParticle() 
   {
     dTheta=(Math.random()*2*Math.PI);
     dSpeed=15*(Math.random()*5); 
     dX=300;
     dY=300; 
-    siz=-490;
+    
   }
 void show()
 {  
 fill(((float)Math.random()*200)+50,0,0);
-int big= siz++;
-textSize(big);
-if(siz>150)
-siz=-490;
-text("DEBT",(float)dX-0,(float)dY);
+text(":)",(float)dX-0,(float)dY);
 
 }
 
 void move()
 {
-  
   dX= dX+(Math.cos(dTheta)*dSpeed);
   dY= dY+(Math.sin(dTheta)*dSpeed);
  
@@ -121,6 +98,32 @@ else if(dX<199 && dY<400 )
 
 else
 dX=200;
+}
+
+}
+
+
+class JumboParticle extends NormalParticle
+{
+
+double dTheta, dSpeed, dX, dY;
+  
+  JumboParticle() 
+  {
+    dTheta=(Math.random()*2*Math.PI);
+    dSpeed=(Math.random()*10); 
+    dX=140;
+    dY=300;
+   }
+public void show()
+{
+  fill((int)(Math.random()*255));
+textSize(70);
+text("JUMBOLICOUS",(float)dX-40,(float)dY);
+  
+}
+public void move()
+{
 }
 
 }
