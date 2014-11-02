@@ -71,6 +71,7 @@ class OddballParticle implements Particle
   }
 void show()
 {  
+textSize(32);
 fill(((float)Math.random()*200)+50,0,0);
 text(":)",(float)dX-0,(float)dY);
 
